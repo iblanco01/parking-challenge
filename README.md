@@ -4,10 +4,18 @@ Reto de una hora para construir una aplicación de reservas de parking usando IA
 
 ## Requisitos
 
-- Node.js 22.13 LTS o superior.
+- Windows con PowerShell y conexión a Internet en el primer arranque.
+- No necesita Node instalado previamente: `bootstrap.ps1` descarga una versión portable si hace falta.
 - No necesita Docker, PostgreSQL ni instalaciones globales.
 
 ## Arranque
+
+```powershell
+.\bootstrap.ps1
+.\start.ps1
+```
+
+Si Node 22.13 LTS o superior ya está instalado, también puedes usar:
 
 ```powershell
 npm install
