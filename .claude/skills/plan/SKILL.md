@@ -17,6 +17,9 @@ Cualquier ejecutor puede seguir el plan sin preguntar: dice qué hacer y `build`
 - `docs/spec.md` y `docs/business-rules.md`. Sin especificación, invoca `spec` (o avisa al usuario) y para.
 - [template.md](template.md), junto a este fichero. Sin él, para y avisa al usuario.
 - `AGENTS.md` leído: sus restricciones y comandos se usan tal cual, nunca reconstruidos.
+- La herramienta `Artifact`, solo para leer el mock en Claude Design enlazado en la sección `Interfaz` de la
+  especificación, cuando lo hay. Sin mock, planifica la interfaz desde la descripción de `Interfaz` y avisa al usuario
+  de que un mock previo da mejores resultados.
 
 ## Reglas
 
@@ -33,6 +36,11 @@ Cualquier ejecutor puede seguir el plan sin preguntar: dice qué hacer y `build`
 - Arquitectura: vertical slices en `apps/backend/src/features/<feature>/` con `<feature>.routes.mjs`,
   `<feature>.service.mjs` y `<feature>.spec.mjs`. Sin controllers/, services/, repositories/, domain/, ports/ ni
   adapters/ globales. Las rutas se registran con el router de `server.mjs`.
+- El mock en Claude Design lo hace `spec`, nunca `plan`. Lee sus artboards con `Artifact` (`action: "read"` sobre el
+  enlace) antes de planificar las tareas de interfaz, y en el `Diseño:` de cada una nombra los artboards que implementa.
+  Si una tarea necesita una pantalla o un estado que el mock no tiene, es una revisión de la especificación: para y
+  dile al usuario que ejecute `spec`. Sin mock o sin la herramienta, planifica desde la sección `Interfaz` y anótalo
+  en `Pendiente`.
 - No añadas dependencias sin preguntar al usuario. Si el plan las necesita, plantéalo en la entrevista.
 - Las reglas de reserva llevan tests (`node:test`, `npm test`): ponlos en el `Tests:` de la tarea que las implementa.
 - Entrevista en el idioma de la sesión; escribe el plan en español de España.

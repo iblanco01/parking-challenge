@@ -39,14 +39,16 @@ No introducir arquitectura hexagonal, repositorios genéricos, capas globales ni
 
 ## Flujo obligatorio
 
-1. `/spec`
-2. `/plan`
-3. `/build`
-4. `/document`
-5. `/finish`
+1. `/intent`
+2. `/spec`
+3. `/plan`
+4. `/build`
+5. `/document`
+6. `/finish`
 
 Las skills están en `.claude/skills/<nombre>/SKILL.md`. Si tu agente no las carga solo, lee ese fichero y sigue sus pasos.
-Cada fase deja su resultado en ficheros del repositorio: `docs/spec.md` y `docs/business-rules.md` (`/spec`), `docs/plan.md` (`/plan`),
+`/spec` advierte de que hacer un mock del servicio en Claude Design (herramienta `Artifact`) es muy necesario para obtener buenos resultados, y recomienda hacerlo antes de seguir.
+Cada fase deja su resultado en ficheros del repositorio: `docs/intent.md` (`/intent`), `docs/spec.md` y `docs/business-rules.md` (`/spec`), `docs/plan.md` (`/plan`),
 el código y sus tests (`/build`), las páginas de `docs/` y el `README.md` (`/document`) y el informe final (`/finish`).
 Todo es local: no se crean tickets, páginas ni pull requests en ningún servicio externo (Jira, Confluence, Bitbucket u otros)
 y `/build` y `/finish` no hacen commit ni push sin que el usuario lo pida.

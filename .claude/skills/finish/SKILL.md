@@ -53,6 +53,11 @@ Arranca con `npm run dev` (o `npm start` tras `npm run build`) y, con `curl`:
 Para cada `ACn` de `docs/spec.md`: el comando o la prueba que lo demuestra, su salida real y el veredicto
 (cumplido, no cumplido o no verificable, con motivo). Un criterio sin evidencia no está cumplido.
 
+Además, la interfaz coincide con el mock en Claude Design de `Interfaz` en `docs/spec.md`: por cada artboard,
+la pantalla o el estado implementado y si coincide. Si no puedes verificarlo visualmente, dilo; no lo des por bueno.
+Si la especificación no trae enlace al mock, comprueba la interfaz contra la descripción de `Interfaz` y anota en
+`Pendiente` que no hubo mock.
+
 ### Paso 5: reglas de AGENTS.md
 
 - Estructura de vertical slices: cada funcionalidad con sus rutas, reglas y tests juntos; sin carpetas globales

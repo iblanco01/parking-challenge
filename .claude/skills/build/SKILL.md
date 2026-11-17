@@ -38,6 +38,10 @@ Una ronda de revisión independiente al final, con una sola corrección de lo gr
 - Sin abstracciones nuevas (clase base, interfaz, wrapper, factoría, helper genérico) hasta que haya tres usos
   reales. Sin código muerto, sin errores tragados, sin cadenas ni números mágicos.
 - Frontend: Angular 19 con componentes standalone, responsive para escritorio y móvil. Sin dependencias nuevas.
+- Si `Interfaz` de `docs/spec.md` enlaza un mock en Claude Design, la interfaz lo sigue (léelo con `Artifact`,
+  `action: "read"`): estructura, estados y textos de los artboards que cada tarea cita en su `Diseño:`.
+  Si no puede seguirse, anota la desviación y el motivo en el `Resultado` de la tarea.
+  Sin mock, sigue la descripción de `Interfaz` y no inventes pantallas ni estados que la especificación no recoja.
 - Nunca hagas commit, push ni cambies de rama: lo decide el usuario (ver `finish`).
 - Datos de prueba ficticios y claramente falsos; nunca datos reales de personas.
 

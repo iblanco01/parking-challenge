@@ -47,11 +47,12 @@ El backend usa `node:sqlite`, incluido en Node.js. La base de datos persistente 
 ## Flujo recomendado para el equipo
 
 1. Leer `AGENTS.md` y `docs/challenge.md`.
-2. Ejecutar `/spec`.
-3. Ejecutar `/plan`.
-4. Ejecutar `/build`.
-5. Ejecutar `/document`.
-6. Ejecutar `/finish`.
+2. Ejecutar `/intent`.
+3. Ejecutar `/spec` (te recomendará hacer un mock del servicio en Claude Design, muy necesario para obtener buenos resultados).
+4. Ejecutar `/plan`.
+5. Ejecutar `/build`.
+6. Ejecutar `/document`.
+7. Ejecutar `/finish`.
 
 ## Tests
 

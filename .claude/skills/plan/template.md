@@ -49,6 +49,7 @@ Sin rutas, código ni jerga; unos pocos párrafos o viñetas cortas.>
 - Cubre: <los criterios de aceptación que cumple, p. ej. `AC1, AC2`, o `ninguno` para una tarea de apoyo>.
 - Ficheros: `<ruta>` (crear), `<ruta>` (`<función, clase o método>`, modificar).
 - Reutiliza: `<función, clase o utilidad>` de `<ruta>`.
+- Diseño: <los artboards del mock en Claude Design que implementa la tarea; borra la línea si la tarea no tiene interfaz>.
 - Cambios: <qué cambia en cada fichero y por qué, en prosa, nunca código. Nombra el comportamiento, lo que se añade
   o renombra y los contratos que cambian>.
 - Tests: <los casos de test que se añaden o actualizan y en qué fichero `*.spec.mjs`: comportamiento, límites y errores>.
