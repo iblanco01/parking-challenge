@@ -5,7 +5,7 @@ Reto de una hora para construir una aplicación de reservas de parking usando IA
 ## Requisitos
 
 - Windows con PowerShell, Linux/Ubuntu (incluido WSL) o macOS (Intel o Apple Silicon), y conexión a Internet en el primer arranque.
-- No necesita Node instalado previamente: `bootstrap.ps1` / `bootstrap.sh` descargan una versión portable (con verificación SHA256) si hace falta. En Linux/macOS necesitan `curl` y `tar`.
+- No necesita Node instalado previamente, y aunque lo tengas no lo usa: `bootstrap.ps1` / `bootstrap.sh` descargan siempre un Node portable (con verificación SHA256) en `tools/`. En Linux/macOS necesitan `curl` y `tar`.
 - No necesita Docker, PostgreSQL ni instalaciones globales.
 
 ## Arranque
@@ -24,7 +24,7 @@ bash ./bootstrap.sh
 bash ./start.sh
 ```
 
-Si Node 22.13 LTS o superior ya está instalado, en cualquier sistema también puedes usar (`npm install` instala además las dependencias de Angular):
+Alternativa con tu propio Node 22.13 LTS o superior, en cualquier sistema (no aislada: usa la caché global de npm; `npm install` instala además las dependencias de Angular):
 
 ```bash
 npm install

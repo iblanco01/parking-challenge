@@ -13,7 +13,7 @@
     "build": "npm --prefix apps/frontend run build",
     "start": "node apps/backend/src/server.mjs",
     "test": "node --test \"apps/backend/src/**/*.spec.mjs\"",
-    "postinstall": "npm --prefix apps/frontend install",
+    "postinstall": "node scripts/install-frontend.mjs",
     "setup": "npm run db:reset",
     "db:reset": "node apps/backend/scripts/reset-db.mjs",
     "preflight": "node scripts/preflight.mjs"

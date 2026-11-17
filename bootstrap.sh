@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Equivalente de bootstrap.ps1 para Linux, WSL y macOS.
 # Uso: bash ./bootstrap.sh
+#
+# Aislamiento: todo lo que se descarga vive dentro de la carpeta del proyecto.
+# Se usa siempre el Node de tools/ (nunca el del sistema) y la caché de npm local.
+# Borrar la carpeta del proyecto deja el equipo como estaba.
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -19,23 +23,15 @@ case "$(uname -m)" in
   *) die "Arquitectura no soportada: $(uname -m)" ;;
 esac
 
-# Node >= 22.13 (node:sqlite sin flag). En WSL se ignora el node de Windows (/mnt/...).
+# Node >= 22.13 (node:sqlite sin flag).
 node_ok() {
   [ -x "$1" ] || return 1
   "$1" -e 'const [a,b]=process.versions.node.split(".").map(Number);process.exit(a>22||(a===22&&b>=13)?0:1)' 2>/dev/null
 }
 
 portable_dir="tools/node-$platform-$arch"
-node_bin=""
-if node_ok "$portable_dir/bin/node"; then
-  node_bin="$portable_dir/bin/node"
-else
-  system_node="$(command -v node || true)"
-  case "$system_node" in /mnt/*) system_node="" ;; esac
-  if [ -n "$system_node" ] && node_ok "$system_node"; then node_bin="$system_node"; fi
-fi
 
-if [ -z "$node_bin" ]; then
+if ! node_ok "$portable_dir/bin/node"; then
   command -v curl >/dev/null || die "Hace falta curl para descargar Node."
   command -v tar >/dev/null || die "Hace falta tar para descomprimir Node."
   name="node-v$NODE_VERSION-$platform-$arch"
@@ -53,12 +49,16 @@ if [ -z "$node_bin" ]; then
   rm -rf "$portable_dir"
   mkdir -p "$portable_dir"
   tar -xzf "$tmp/$name.tar.gz" -C "$portable_dir" --strip-components=1
-  node_bin="$portable_dir/bin/node"
 fi
 
-node_dir="$(cd "$(dirname "$node_bin")" && pwd)"
-export PATH="$node_dir:$PATH"
-echo "Usando Node: $(node --version)"
+export PATH="$(cd "$portable_dir/bin" && pwd):$PATH"
+export npm_config_cache="$PWD/.npm-cache"
+export NODE_COMPILE_CACHE="$PWD/.node-compile-cache"
+export npm_config_update_notifier=false
+export npm_config_fund=false
+export NG_CLI_ANALYTICS=false
+
+echo "Usando Node: $(node --version) ($portable_dir)"
 npm install   # instala también las dependencias de Angular (postinstall)
 node apps/backend/scripts/reset-db.mjs
 echo "Preparación completada. Ejecuta: bash ./start.sh"

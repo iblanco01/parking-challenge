@@ -8,10 +8,14 @@ case "$(uname -s)" in Linux) platform=linux ;; Darwin) platform=darwin ;; *) pla
 case "$(uname -m)" in x86_64|amd64) arch=x64 ;; arm64|aarch64) arch=arm64 ;; *) arch=unknown ;; esac
 
 portable="tools/node-$platform-$arch/bin"
-if [ -x "$portable/node" ]; then
-  export PATH="$(cd "$portable" && pwd):$PATH"
-fi
-command -v node >/dev/null || { echo "Node no encontrado. Ejecuta: bash ./bootstrap.sh" >&2; exit 1; }
+[ -x "$portable/node" ] || { echo "No hay Node portable en $portable. Ejecuta primero: bash ./bootstrap.sh" >&2; exit 1; }
+
+# Mismo aislamiento que bootstrap.sh: Node de tools/ y caché de npm dentro del proyecto.
+export PATH="$(cd "$portable" && pwd):$PATH"
+export npm_config_cache="$PWD/.npm-cache"
+export NODE_COMPILE_CACHE="$PWD/.node-compile-cache"
+export npm_config_update_notifier=false
+export NG_CLI_ANALYTICS=false
 
 [ -f data/parking.sqlite ] || node apps/backend/scripts/reset-db.mjs
 exec npm run dev

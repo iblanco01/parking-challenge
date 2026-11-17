@@ -14,8 +14,8 @@ Construir una aplicación web para reservar plazas de parking de la empresa.
 
 Funciona en Windows (PowerShell), Linux/WSL y macOS. Detalle completo en `README.md`.
 
-- Sin Node ≥22.13 instalado: en Windows `.\bootstrap.ps1` y `.\start.ps1`; en Linux/WSL/macOS `bash ./bootstrap.sh` y `bash ./start.sh`. Descargan Node portable en `tools/`, instalan todas las dependencias y crean la base.
-- Con Node ≥22.13 (cualquier sistema): `npm install` (instala también Angular), `npm run setup` y `npm run dev`.
+- Arranque recomendado y aislado (cualquier sistema, con o sin Node instalado): en Windows `.\bootstrap.ps1` y `.\start.ps1`; en Linux/WSL/macOS `bash ./bootstrap.sh` y `bash ./start.sh`. Usan siempre el Node portable de `tools/` (nunca el del sistema), la caché de npm en `.npm-cache/` y dejan todo dentro de la carpeta del proyecto: borrarla deja el equipo como estaba.
+- Alternativa con tu propio Node ≥22.13 (no aislada: la caché de npm es la global): `npm install` (instala también Angular), `npm run setup` y `npm run dev`.
 - En WSL, trabajar dentro del sistema de ficheros de Linux (no en `/mnt/c`) y no compartir `node_modules/` con Windows.
 - Los scripts npm no deben usar `npm.cmd` ni comandos específicos de un sistema.
 - Resultado esperado: frontend en http://localhost:4200, backend en http://localhost:3000 y `GET /api/health` → `{"status":"ok"}`.
@@ -44,6 +44,12 @@ No introducir arquitectura hexagonal, repositorios genéricos, capas globales ni
 3. `/build`
 4. `/document`
 5. `/finish`
+
+Las skills están en `.claude/skills/<nombre>/SKILL.md`. Si tu agente no las carga solo, lee ese fichero y sigue sus pasos.
+Cada fase deja su resultado en ficheros del repositorio: `docs/spec.md` y `docs/business-rules.md` (`/spec`), `docs/plan.md` (`/plan`),
+el código y sus tests (`/build`), las páginas de `docs/` y el `README.md` (`/document`) y el informe final (`/finish`).
+Todo es local: no se crean tickets, páginas ni pull requests en ningún servicio externo (Jira, Confluence, Bitbucket u otros)
+y `/build` y `/finish` no hacen commit ni push sin que el usuario lo pida.
 
 ## Reglas
 
