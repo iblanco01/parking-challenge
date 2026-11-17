@@ -3,8 +3,6 @@ import { existsSync, createReadStream } from 'node:fs';
 import { extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { db } from './db.mjs';
-import { registerAvailabilityRoutes } from './features/availability/availability.routes.mjs';
-import { registerReservationRoutes } from './features/reservations/reservations.routes.mjs';
 
 const root = resolve(fileURLToPath(new URL('../../..', import.meta.url)));
 const frontend = resolve(root, 'apps/frontend/dist/frontend/browser');
@@ -34,9 +32,6 @@ async function readBody(req) {
   let raw = ''; for await (const chunk of req) raw += chunk;
   return raw ? JSON.parse(raw) : {};
 }
-
-registerAvailabilityRoutes(router);
-registerReservationRoutes(router);
 
 const server = createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');

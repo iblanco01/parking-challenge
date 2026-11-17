@@ -12,7 +12,7 @@ Construir una aplicación web para reservar plazas de parking de la empresa.
 
 ## Arquitectura
 
-Usar vertical slices. Cada funcionalidad debe contener sus rutas, reglas y tests juntos.
+Usar vertical slices. Cada funcionalidad nueva debe contener sus rutas, reglas y tests juntos. El repositorio inicial no debe incluir funcionalidades de reserva implementadas.
 
 ```text
 apps/backend/src/features/<feature>/

@@ -27,7 +27,7 @@ npm run dev
 - Backend: http://localhost:3000
 - Health check: http://localhost:3000/api/health
 
-El backend usa `node:sqlite`, incluido en Node.js. La base de datos persistente queda en `data/parking.sqlite`.
+El backend usa `node:sqlite`, incluido en Node.js. La base de datos persistente queda en `data/parking.sqlite`, inicialmente vacía para que el equipo defina el modelo durante `/spec` y `/plan`.
 
 ## Flujo recomendado para el equipo
 
