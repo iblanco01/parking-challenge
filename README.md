@@ -42,12 +42,21 @@ npm run dev
 - Backend: http://localhost:3000
 - Health check: http://localhost:3000/api/health
 
-El backend usa `node:sqlite`, incluido en Node.js. La base de datos persistente queda en `data/parking.sqlite`, inicialmente vacía para que el equipo defina el modelo durante `/spec` y `/plan`.
+El backend usa `node:sqlite`, incluido en Node.js. La base de datos persistente queda en `data/parking.sqlite`, inicialmente vacía para que el equipo defina el modelo durante `/intent`, `/spec` y `/plan`.
+
+## Cómo empezar en Claude Desktop
+
+Las skills viven en `.claude/skills/` y Claude las carga al abrir el repo:
+
+1. Abre Claude Desktop y entra en la pestaña **Code**.
+2. Pulsa para elegir carpeta y selecciona la raíz del repo, la que contiene `AGENTS.md` y `.claude/`. No elijas `apps/` ni la carpeta que contiene el repo.
+3. Si te pide confiar en la carpeta, acepta. Sin esa confianza las skills del proyecto no se cargan.
+4. Escribe `/` en el cuadro de mensaje. Deben aparecer `intent`, `spec`, `plan`, `build`, `document` y `finish`. Si no salen, abre una sesión nueva en esa carpeta.
 
 ## Flujo recomendado para el equipo
 
 1. Leer `AGENTS.md` y `docs/challenge.md`.
-2. Ejecutar `/intent`.
+2. Ejecutar `/intent` (lo primero: define el problema y el resultado esperado).
 3. Ejecutar `/spec` (te recomendará hacer un mock del servicio en Claude Design, muy necesario para obtener buenos resultados).
 4. Ejecutar `/plan`.
 5. Ejecutar `/build`.
