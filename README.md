@@ -4,24 +4,39 @@ Reto de una hora para construir una aplicación de reservas de parking usando IA
 
 ## Requisitos
 
-- Windows con PowerShell y conexión a Internet en el primer arranque.
-- No necesita Node instalado previamente: `bootstrap.ps1` descarga una versión portable si hace falta.
+- Windows con PowerShell, Linux/Ubuntu (incluido WSL) o macOS (Intel o Apple Silicon), y conexión a Internet en el primer arranque.
+- No necesita Node instalado previamente: `bootstrap.ps1` / `bootstrap.sh` descargan una versión portable (con verificación SHA256) si hace falta. En Linux/macOS necesitan `curl` y `tar`.
 - No necesita Docker, PostgreSQL ni instalaciones globales.
 
 ## Arranque
+
+Windows (PowerShell):
 
 ```powershell
 .\bootstrap.ps1
 .\start.ps1
 ```
 
-Si Node 22.13 LTS o superior ya está instalado, también puedes usar:
+Linux, WSL o macOS (bash/zsh):
 
-```powershell
+```bash
+bash ./bootstrap.sh
+bash ./start.sh
+```
+
+Si Node 22.13 LTS o superior ya está instalado, en cualquier sistema también puedes usar (`npm install` instala además las dependencias de Angular):
+
+```bash
 npm install
 npm run setup
 npm run dev
 ```
+
+### Notas para WSL
+
+- Clona el repositorio **dentro del sistema de ficheros de Linux** (por ejemplo `~/parking-challenge`), no en `/mnt/c/...`: es mucho más rápido y evita problemas con `node_modules`.
+- No compartas la carpeta con una instalación de Windows: `node_modules/` y `tools/` contienen binarios de cada sistema. Si cambias de sistema sobre la misma carpeta, borra `node_modules/` y `apps/frontend/node_modules/` y repite el arranque.
+- Se ignora el `node` de Windows visible desde WSL (`/mnt/...`).
 
 - Frontend: http://localhost:4200
 - Backend: http://localhost:3000
@@ -38,9 +53,17 @@ El backend usa `node:sqlite`, incluido en Node.js. La base de datos persistente 
 5. Ejecutar `/document`.
 6. Ejecutar `/finish`.
 
+## Tests
+
+```bash
+npm test
+```
+
+Ejecuta los `*.spec.mjs` del backend con `node:test`. Sin funcionalidades aún, no hay tests.
+
 ## Producción local
 
-```powershell
+```bash
 npm run build
 npm start
 ```

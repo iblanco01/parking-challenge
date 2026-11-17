@@ -1,9 +1,8 @@
 $ErrorActionPreference = 'Stop'
-$requiredMajor = 22
+$minVersion = [version]'22.13.0'
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) { throw 'Node.js no está instalado. Ejecuta .\bootstrap.ps1.' }
 $version = (& node --version).Trim().TrimStart('v')
-$major = [int]($version.Split('.')[0])
-if ($major -lt $requiredMajor) { throw "Se requiere Node.js $requiredMajor o superior. Detectado: $version" }
+if ([version](($version -split '-')[0]) -lt $minVersion) { throw "Se requiere Node.js $minVersion o superior. Detectado: $version" }
 Write-Host "Node.js $version OK"
 Write-Host 'Preflight OK'

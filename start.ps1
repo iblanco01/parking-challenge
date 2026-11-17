@@ -5,6 +5,10 @@ $node = if (Test-Path $localNode) { $localNode } else { (Get-Command node -Error
 $npm = Join-Path (Split-Path -Parent $node) 'npm.cmd'
 Push-Location $projectRoot
 try {
-  if (-not (Test-Path 'data\parking.sqlite')) { & $node apps/backend/scripts/reset-db.mjs }
+  if (-not (Test-Path 'data\parking.sqlite')) {
+    & $node apps/backend/scripts/reset-db.mjs
+    if ($LASTEXITCODE -ne 0) { throw 'No se pudo crear la base de datos.' }
+  }
   & $npm run dev
+  if ($LASTEXITCODE -ne 0) { throw "npm run dev terminó con código $LASTEXITCODE" }
 } finally { Pop-Location }

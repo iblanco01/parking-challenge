@@ -3,8 +3,7 @@
   "private": true,
   "scripts": {
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build",
-    "test": "ng test --watch=false --browsers=ChromeHeadless"
+    "build": "ng build"
   },
   "dependencies": {
     "@angular/common": "^19.2.0",
